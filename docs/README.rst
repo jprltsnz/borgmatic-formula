@@ -1,21 +1,21 @@
 .. _readme:
 
-TEMPLATE-formula
+borgmatic-formula
 ================
 
 |img_travis| |img_sr|
 
-.. |img_travis| image:: https://travis-ci.com/saltstack-formulas/TEMPLATE-formula.svg?branch=master
+.. |img_travis| image:: https://travis-ci.com/saltstack-formulas/borgmatic-formula.svg?branch=master
    :alt: Travis CI Build Status
    :scale: 100%
-   :target: https://travis-ci.com/saltstack-formulas/TEMPLATE-formula
+   :target: https://travis-ci.com/saltstack-formulas/borgmatic-formula
 .. |img_sr| image:: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
    :alt: Semantic Release
    :scale: 100%
    :target: https://github.com/semantic-release/semantic-release
 
-A SaltStack formula that is empty. It has dummy content to help with a quick
-start on a new formula and it serves as a style guide.
+A SaltStack formula that installs borg backup software with borgmatic to manage
+it. It is currently a work in progress and not in any useful state.
 
 .. contents:: **Table of Contents**
    :depth: 1
@@ -46,35 +46,6 @@ Please see `How to contribute <https://github.com/saltstack-formulas/.github/blo
 Special notes
 -------------
 
-.. <REMOVEME
-
-Using this template
-^^^^^^^^^^^^^^^^^^^
-
-The easiest way to use this template formula as a base for a new formula is to use GitHub's **Use this template** button to create a new repository. For consistency with the rest of the formula ecosystem, name your formula repository following the pattern ``<formula theme>-formula``, where ``<formula theme>`` consists of lower-case alphabetic characters and numbers.
-
-In the rest of this example we'll use ``example`` as the ``<formula theme>``.
-
-Follow these steps to complete the conversion from ``template-formula`` to ``example-formula``. ::
-
-  $ git clone git@github.com:YOUR-USERNAME/example-formula.git
-  $ cd example-formula/
-  $ bin/convert-formula.sh example
-  $ git push --force
-
-Alternatively, it's possible to clone ``template-formula`` into a new repository and perform the conversion there. For example::
-
-  $ git clone https://github.com/saltstack-formulas/template-formula example-formula
-  $ cd example-formula/
-  $ bin/convert-formula.sh example
-
-To take advantage of `semantic-release <https://github.com/semantic-release/semantic-release>`_ for automated changelog generation and release tagging, you will need a GitHub `Personal Access Token <https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line>`_ with at least the **public_repo** scope.
-
-In the Travis repository settings for your new repository, create an `environment variable <https://docs.travis-ci.com/user/environment-variables/#defining-variables-in-repository-settings>`_ named ``GH_TOKEN`` with the personal access token as value, restricted to the ``master`` branch for security.
-
-Note that this repository uses a `CODEOWNERS <https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners>`_ file to assign ownership to various parts of the formula. The conversion process removes overall ownership, but you should consider assigning ownership to yourself or your organisation when contributing your new formula to the ``saltstack-formulas`` organisation.
-
-.. REMOVEME>
 
 Available states
 ----------------
@@ -82,80 +53,58 @@ Available states
 .. contents::
    :local:
 
-``TEMPLATE``
+``borgmatic``
 ^^^^^^^^^^^^
 
 *Meta-state (This is a state that includes other states)*.
 
-This installs the TEMPLATE package,
-manages the TEMPLATE configuration file and then
-starts the associated TEMPLATE service.
+This installs the borgmatic package,
+manages the borgmatic configuration file and then
+starts the associated borgmatic service.
 
-``TEMPLATE.package``
+``borgmatic.package``
 ^^^^^^^^^^^^^^^^^^^^
 
-This state will install the TEMPLATE package only.
+This state will install the borgmatic package only.
 
-``TEMPLATE.config``
+``borgmatic.config``
 ^^^^^^^^^^^^^^^^^^^
 
-This state will configure the TEMPLATE service and has a dependency on ``TEMPLATE.install``
+This state will configure the borgmatic service and has a dependency on ``borgmatic.install``
 via include list.
 
-``TEMPLATE.service``
+``borgmatic.service``
 ^^^^^^^^^^^^^^^^^^^^
 
-This state will start the TEMPLATE service and has a dependency on ``TEMPLATE.config``
+This state will start the borgmatic service and has a dependency on ``borgmatic.config``
 via include list.
 
-``TEMPLATE.clean``
+``borgmatic.clean``
 ^^^^^^^^^^^^^^^^^^
 
 *Meta-state (This is a state that includes other states)*.
 
-this state will undo everything performed in the ``TEMPLATE`` meta-state in reverse order, i.e.
+this state will undo everything performed in the ``borgmatic`` meta-state in reverse order, i.e.
 stops the service,
 removes the configuration file and
 then uninstalls the package.
 
-``TEMPLATE.service.clean``
+``borgmatic.service.clean``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This state will stop the TEMPLATE service and disable it at boot time.
+This state will stop the borgmatic service and disable it at boot time.
 
-``TEMPLATE.config.clean``
+``borgmatic.config.clean``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This state will remove the configuration of the TEMPLATE service and has a
-dependency on ``TEMPLATE.service.clean`` via include list.
+This state will remove the configuration of the borgmatic service and has a
+dependency on ``borgmatic.service.clean`` via include list.
 
-``TEMPLATE.package.clean``
+``borgmatic.package.clean``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This state will remove the TEMPLATE package and has a depency on
-``TEMPLATE.config.clean`` via include list.
-
-``TEMPLATE.subcomponent``
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-*Meta-state (This is a state that includes other states)*.
-
-This state installs a subcomponent configuration file before
-configuring and starting the TEMPLATE service.
-
-``TEMPLATE.subcomponent.config``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-This state will configure the TEMPLATE subcomponent and has a
-dependency on ``TEMPLATE.config`` via include list.
-
-``TEMPLATE.subcomponent.config.clean``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-This state will remove the configuration of the TEMPLATE subcomponent
-and reload the TEMPLATE service by a dependency on
-``TEMPLATE.service.running`` via include list and ``watch_in``
-requisite.
+This state will remove the borgmatic package and has a depency on
+``borgmatic.config.clean`` via include list.
 
 Testing
 -------
@@ -180,7 +129,7 @@ e.g. ``debian-9-2019-2-py3``.
 ``bin/kitchen converge``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Creates the docker instance and runs the ``TEMPLATE`` main state, ready for testing.
+Creates the docker instance and runs the ``borgmatic`` main state, ready for testing.
 
 ``bin/kitchen verify``
 ^^^^^^^^^^^^^^^^^^^^^^

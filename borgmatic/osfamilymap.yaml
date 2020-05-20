@@ -12,13 +12,12 @@
 ---
 Debian:
   pkg:
-    name: TEMPLATE-debian
-  config: /etc/TEMPLATE.d/custom.conf
+    borg: borgbackup
+    borgmatic: borgmatic
 
 RedHat:
   pkg:
     name: TEMPLATE-redhat
-  config: /etc/TEMPLATE.conf
 
 Suse:
   pkg:
@@ -28,7 +27,8 @@ Gentoo: {}
 
 Arch:
   pkg:
-    name: TEMPLATE-arch
+    borg: borg
+    borgmatic: borgmatic
   service:
     name: service-arch
 
