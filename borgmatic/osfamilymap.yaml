@@ -14,6 +14,9 @@ Debian:
   pkg:
     borg: borgbackup
     borgmatic: borgmatic
+    pip_reqs:
+      - python3-pip
+      - python3-setuptools
 
 RedHat:
   pkg:
@@ -29,6 +32,9 @@ Arch:
   pkg:
     borg: borg
     borgmatic: borgmatic
+    pip_reqs:
+      - python3-pip
+      - python3-setuptools
   service:
     name: service-arch
 

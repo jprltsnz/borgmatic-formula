@@ -2,14 +2,14 @@
 # vim: ft=yaml
 ---
 borgmatic:
+  shell: /bin/bash
   pkg:
-    name: borgmatic
+    borg: borgbackup
+    borgmatic: borgmatic
   rootgroup: root
-  config: '/etc/borgmatic'
+  config:
+    service: '/etc/systemd/system/borgmatic.service'
+    timer: '/etc/systemd/system/borgmatic.timer'
+    base_dir: '/etc/borgmatic.d'
   service:
-    name: borgmatic-timer
-  subcomponent:
-    config: '/etc/borgmatic-subcomponent-formula.conf'
-  # Just here for testing
-  added_in_defaults: defaults_value
-  winner: defaults
+    name: borgmatic.timer

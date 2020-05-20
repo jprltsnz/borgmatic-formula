@@ -2,5 +2,12 @@
 # File managed by Salt at <{{ source }}>.
 # Your changes will be overwritten.
 ########################################################################
+[Unit]
+Description=Run borgmatic backup
 
-This is an example file from SaltStack template-formula.
+[Timer]
+OnCalendar={{ borgmatic.timer  }}
+Persistent=true
+
+[Install]
+WantedBy=timers.target

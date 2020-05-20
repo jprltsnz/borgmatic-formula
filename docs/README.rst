@@ -15,7 +15,7 @@ borgmatic-formula
    :target: https://github.com/semantic-release/semantic-release
 
 A SaltStack formula that installs borg backup software with borgmatic to manage
-it. It is currently a work in progress and not in any useful state.
+it.
 
 .. contents:: **Table of Contents**
    :depth: 1
@@ -45,7 +45,11 @@ Please see `How to contribute <https://github.com/saltstack-formulas/.github/blo
 
 Special notes
 -------------
+I am new to kitchen testing, so currently the verify step is not well setup and
+will error out.
 
+Currently only tested against Arch Linux and Debian, contributions for other
+OSes are welcome.
 
 Available states
 ----------------

@@ -9,6 +9,13 @@
 include:
   - {{ sls_config_file }}
 
+borgmatic-init-repos:
+  cmd.wait:
+    - name: "borgmatic init --encryption {{borgmatic.encryption}}"
+    - shell: {{ borgmatic.shell }}
+    - watch:
+      - sls: {{ sls_config_file }}
+
 borgmatic-service-running-service-running:
   service.running:
     - name: {{ borgmatic.service.name }}
