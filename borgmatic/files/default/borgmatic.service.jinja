@@ -25,4 +25,8 @@ LogRateLimitIntervalSec=0
 
 # Delay start to prevent backups running during boot.
 ExecStartPre=sleep 1m
+{% if borgmatic.use_pip %}
+ExecStart=systemd-inhibit --who="borgmatic" --why="Prevent interrupting scheduled backup" /usr/local/bin/borgmatic --syslog-verbosity 1
+{% else %}
 ExecStart=systemd-inhibit --who="borgmatic" --why="Prevent interrupting scheduled backup" /usr/bin/borgmatic --syslog-verbosity 1
+{% endif %}
